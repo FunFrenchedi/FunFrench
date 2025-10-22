@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>French School Supplies Quiz</title>
+    <link rel="icon" type="image/jpg" href="replit/french.jpg">
+  </head>
+
+  <body style="background-color: lightcyan; text-align: center; font-family: 'Courier New';">
+    <h2 style="font-size: 70px;">French Practice: School Supplies</h2>
+    <h4 style="font-size: 35px;">Learning French is fun! Click “Next” to learn new words.</h4>
+    <hr>
+
+    <h1 id="word" style="font-size: 50px;"></h1>
+    <img id="itemImage" src="" alt="school item" width="200" style="border-radius: 10px;"><br><br>
+
+    <audio id="itemSound" controls autoplay></audio><br><br>
+
+    <button onclick="nextItem()" style="font-size: 20px; padding: 10px 20px;">Next</button>
+
+    <script>
+      const items = [
+        { image: 'replit/red.png', word: 'ROUGE', sound: 'replit/red.mp3' },
+        { image: 'replit/orange.png', word: 'ORANGE', sound: 'replit/orange.mp3' },
+        { image: 'replit/yellow.png', word: 'JAUNE', sound: 'replit/yellow.mp3' },
+        { image: 'replit/green.png', word: 'VERT', sound: 'replit/green.mp3' },
+        { image: 'replit/blue.png', word: 'BLEU', sound: 'replit/blue.mp3' },
+        { image: 'replit/purple.png', word: 'VIOLET', sound: 'replit/purple.mp3' },
+        { image: 'replit/black.jpg', word: 'NOIR', sound: 'replit/black.mp3' },
+        { image: 'replit/pink.png', word: 'ROSE', sound: 'replit/pink.mp3' },
+        { image: 'replit/brown.png', word: 'MARRON', sound: 'replit/brown.mp3' },
+        { image: 'replit/white.png', word: 'BLANC', sound: 'replit/white.mp3' },
+        { image: 'replit/grey.jpg', word: 'GRIS', sound: 'replit/grey.mp3' }
+      ];
+
+      let currentIndex = 0;
+
+      function showItem() {
+        const item = items[currentIndex];
+        document.getElementById('word').textContent = item.word;
+        document.getElementById('itemImage').src = item.image;
+        const sound = document.getElementById('itemSound');
+        sound.src = item.sound;
+        sound.play();
+      }
+
+      function nextItem() {
+        currentIndex++;
+        if (currentIndex >= items.length) {
+          currentIndex = 0;
+        }
+        showItem();
+      }
+
+      showItem(); // show first item when page loads
+    </script>
+  </body>
+</html>
+

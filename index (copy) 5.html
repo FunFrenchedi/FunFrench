@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>French Listening Quiz</title>
+  <link rel="icon" type="replit/french.jpg" href="/replit/french.jpg">
+  <style>
+    body {
+      text-align: center;
+      font-family: 'Courier New';
+      background-color: lightcyan;
+    }
+    img {
+      width: 150px;
+      margin: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <h1 style="font-size: 60px;">🎧 French Listening Quiz</h1>
+  <h3>Listen to the sound and click the correct picture!</h3>
+
+  <audio id="soundPlayer" controls autoplay></audio>
+  <p id="message" style="font-size: 25px;"></p>
+
+  <div id="choices"></div>
+
+  <button onclick="newRound()" style="font-size: 20px; padding: 10px 20px; margin-top: 20px;">🔁 Next</button>
+
+  <script>
+    const items = [
+      { image: 'replit/red.png', word: 'ROUGE' },
+      { image: 'replit/orange.png', word: 'ORANGE' },
+      { image: 'replit/yellow.png', word: 'JAUNE' },
+      { image: 'replit/green.png', word: 'VERT' },
+      { image: 'replit/blue.png', word: 'BLEU' },
+      { image: 'replit/purple.png', word: 'VIOLET' },
+      { image: 'replit/black.jpg', word: 'NOIR' },
+      { image: 'replit/pink.png', word: 'ROSE' },
+      { image: 'replit/brown.png', word: 'MARRON' },
+      { image: 'replit/white.png', word: 'BLANC' },
+      { image: 'replit/grey.jpg', word: 'GRIS' }
+    ];
+
+
+    let correctItem;
+
+    function newRound() {
+      // Pick a random correct item
+      correctItem = items[Math.floor(Math.random() * items.length)];
+
+      // Play its sound
+      const sound = document.getElementById('soundPlayer');
+      sound.src = correctItem.sound;
+      sound.play();
+
+      // Pick 2 other random options
+      const shuffled = [...items].sort(() => 0.5 - Math.random()).slice(0, 3);
+      if (!shuffled.includes(correctItem)) shuffled[0] = correctItem;
+
+      // Shuffle final 3 options
+      const finalChoices = shuffled.sort(() => 0.5 - Math.random());
+
+      // Display pictures
+      const container = document.getElementById('choices');
+      container.innerHTML = '';
+      finalChoices.forEach(item => {
+        const img = document.createElement('img');
+        img.src = item.image;
+        img.onclick = () => checkAnswer(item.word);
+        container.appendChild(img);
+      });
+
+      document.getElementById('message').textContent = '';
+    }
+
+    function checkAnswer(selectedWord) {
+      const message = document.getElementById('message');
+      if (selectedWord === correctItem.word) {
+        message.textContent = '✅ Correct! It was ' + correctItem.word + '!';
+        message.style.color = 'green';
+      } else {
+        message.textContent = '❌ Try again!';
+        message.style.color = 'red';
+      }
+    }
+
+    newRound(); // start game
+  </script>
+</body>
+</html>

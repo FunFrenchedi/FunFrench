@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>French School Supplies Quiz</title>
+    <link rel="icon" type="image/jpg" href="replit/french.jpg">
+  </head>
+
+  <body style="background-color: lightcyan; text-align: center; font-family: 'Courier New';">
+    <h2 style="font-size: 70px;">French Practice: School Supplies</h2>
+    <h4 style="font-size: 35px;">Learning French is fun! Click “Next” to learn new words.</h4>
+    <hr>
+
+    <h1 id="word" style="font-size: 50px;"></h1>
+    <img id="itemImage" src="" alt="school item" width="200" style="border-radius: 10px;"><br><br>
+
+    <audio id="itemSound" controls autoplay></audio><br><br>
+
+    <button onclick="nextItem()" style="font-size: 20px; padding: 10px 20px;">Next</button>
+
+    <script>
+      const items = [
+        { image: 'replit/pencil.png', word: 'CRAYON', sound: 'replit/pencil.mp3' },
+        { image: 'replit/notebook.jpg', word: 'CAHIER', sound: 'replit/notebook.mp3' },
+        { image: 'replit/scissors.jpg', word: 'CISEAUX', sound: 'replit/scissors.mp3' },
+        { image: 'replit/ruler.jpg', word: 'RÈGLE', sound: 'replit/ruler.mp3' },
+        { image: 'replit/eraser.jpg', word: 'GOMME', sound: 'replit/eraser.mp3' },
+        { image: 'replit/backpack.jpg', word: 'SAC À DOS', sound: 'replit/backpack.mp3' },
+        { image: 'replit/books.jpg', word: 'LIVRES', sound: 'replit/books.mp3' },
+        { image: 'replit/pen.jpg', word: 'STYLO', sound: 'replit/pen.mp3' },
+        { image: 'replit/glue.jpg', word: 'COLLE', sound: 'replit/glue.mp3' },
+        { image: 'replit/desk.jpg', word: 'BUREAU', sound: 'replit/desk.mp3' },
+        { image: 'replit/chair.jpg', word: 'CHAISE', sound: 'replit/chair.mp3' }
+      ];
+
+      let currentIndex = 0;
+
+      function showItem() {
+        const item = items[currentIndex];
+        document.getElementById('word').textContent = item.word;
+        document.getElementById('itemImage').src = item.image;
+        const sound = document.getElementById('itemSound');
+        sound.src = item.sound;
+        sound.play();
+      }
+
+      function nextItem() {
+        currentIndex++;
+        if (currentIndex >= items.length) {
+          currentIndex = 0;
+        }
+        showItem();
+      }
+
+      showItem(); // show first item when page loads
+    </script>
+  </body>
+</html>

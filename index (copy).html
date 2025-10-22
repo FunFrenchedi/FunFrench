@@ -1,0 +1,59 @@
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>French School Supplies Practice</title>
+      <link rel="icon" type="image/jpg" href="replit/french.jpg">
+    </head>
+
+    <body style="background-color: lightcyan;">
+      <h2 style="font-family: Courier New; font-size: 70px; text-align: center;">
+        French Practice: School Supplies
+      </h2>
+      <h4 style="font-family: Courier New; font-size: 35px; text-align: center;">
+        Learning French is fun!! Please click the button that you want.
+      </h4>
+      <hr>
+
+      <h1 id="word" style="font-size: 50px; text-align: center;"></h1>
+      <div style="text-align: center;">
+        <img id="itemImage" src="" alt="school item" width="200" style="border-radius: 10px;">
+        <br><br>
+        <button onclick="nextItem()" style="font-size: 20px; padding: 10px 20px;">Next</button>
+      </div>
+
+      <script>
+        const items = [
+          { image: 'replit/pencil.png', word: 'CRAYON' },
+          { image: 'replit/notebook.jpg', word: 'CAHIER' },
+          { image: 'replit/scissors.jpg', word: 'CISEAUX' },
+          { image: 'replit/ruler.jpg', word: 'RÈGLE' },
+          { image: 'replit/eraser.jpg', word: 'GOMME' },
+          { image: 'replit/backpack.jpg', word: 'SAC À DOS' },
+          { image: 'replit/books.jpg', word: 'LIVRES' },
+          { image: 'replit/pen.jpg', word: 'STYLO' },
+          { image: 'replit/glue.jpg', word: 'COLLE' },
+          { image: 'replit/desk.jpg', word: 'BUREAU' },
+          { image: 'replit/chair.jpg', word: 'CHAISE' }
+        ];
+
+        let currentIndex = 0;
+
+        function showItem() {
+          const item = items[currentIndex];
+          document.getElementById('word').textContent = item.word;
+          document.getElementById('itemImage').src = item.image;
+        }
+
+        function nextItem() {
+          currentIndex++;
+          if (currentIndex >= items.length) {
+            currentIndex = 0; // go back to the first item
+          }
+          showItem();
+        }
+
+        showItem(); // show first item when page loads
+      </script>
+    </body>
+  </html>

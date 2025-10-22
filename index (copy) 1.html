@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>French School Supplies Quiz</title>
+  <link rel="icon" type="replit/french.jpg" href="/replit/french.jpg">
+</head>
+<body style="background-color: lightcyan;">
+  <h2 style="font-family:Courier New ; font-size: 70px; text-align: center;" >French Quiz: School Supplies</h2>
+  <p font-size:>Look at the picture and type what it is in French!</p>
+
+  <img id="itemImage" src="" alt="school item" width="150"><br><br>
+
+  <label for="answer" >Your answer:</label>
+  <input type="text" id="answer" placeholder="Write in French">
+  <button onclick="checkAnswer()">Submit</button>
+  <p id="message"></p>
+
+  <script>
+    const items = [
+      { image: 'replit/pencil.png', answer: 'crayon' },
+      { image: 'replit/notebook.jpg', answer: 'cahier' },
+      { image: 'replit/scissors.jpg', answer: 'ciseaux' },
+      { image: 'replit/ruler.jpg', answer: 'règle' },
+      { image: 'replit/backpack.jpg', answer: 'sac a dos' },
+      { image: 'replit/books.jpg', answer: 'livres' },
+      { image: 'replit/chair.jpg', answer: 'chaise' },
+      { image: 'replit/desk.jpg', answer: 'bureau' },
+      { image: 'replit/glue.jpg', answer: 'colle' },
+      { image: 'replit/pen.jpg', answer: 'stylo' },
+      { image: 'replit/pencil-case.jpg', answer: 'trousse' },
+      { image: 'replit/pencil-sharpner.jpg', answer: 'taille-crayon' },
+      { image: 'replit/pencil-crayon.png', answer: 'crayon' }
+    ];
+
+    let currentItem;
+
+    function newQuestion() {
+      const randomIndex = Math.floor(Math.random() * items.length);
+      currentItem = items[randomIndex];
+      document.getElementById('itemImage').src = currentItem.image;
+      document.getElementById('answer').value = '';
+      document.getElementById('message').textContent = '';
+    }
+
+    function checkAnswer() {
+      const answer = document.getElementById('answer').value.trim().toLowerCase();
+      const message = document.getElementById('message');
+
+      if (answer === currentItem.answer) {
+        message.textContent = '✅ Correct! It’s ' + currentItem.answer + ' in French!';
+        message.style.color = 'green';
+        setTimeout(newQuestion, 1500);
+      } else {
+        message.textContent = '❌ Try again!';
+        message.style.color = 'red';
+      }
+    }
+
+    newQuestion();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>French Word Scramble</title>
+  <link rel="icon" type="replit/french.jpg" href="/replit/french.jpg">
+  <style>
+    body {
+      font-family: 'Courier New';
+      text-align: center;
+      background-color: lightyellow;
+      margin-top: 100px;
+    }
+    h1 {
+      font-size: 60px;
+      color: darkblue;
+    }
+    #scrambled {
+      font-size: 50px;
+      margin: 30px;
+      color: darkred;
+    }
+    input {
+      font-size: 25px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    button {
+      font-size: 25px;
+      padding: 10px 20px;
+      margin-top: 15px;
+    }
+    #timer {
+      font-size: 30px;
+      color: darkgreen;
+      margin-top: 20px;
+    }
+    #score {
+      font-size: 25px;
+      color: purple;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>French Word Scramble</h1>
+  <div id="scrambled"></div>
+  <input type="text" id="guess" placeholder="Type the correct word">
+  <br>
+  <button onclick="checkAnswer()">Submit</button>
+  
+  <div id="timer">Time left: 30s</div>
+  <div id="score">Score: 0</div>
+
+  <script>
+    const words = [
+      { word: "rouge" },
+      { word: "orange" },
+      { word: "jaune" },
+      { word: "vert" },
+      { word: "bleu" },
+      { word: "violet" },
+      { word: "noir" },
+      { word: "rose" },
+      { word: "marron" },
+      { word: "blanc" },
+      { word: "gris" }
+    ];
+
+    let currentIndex = 0;
+    let currentWord = "";
+    let scrambled = "";
+    let score = 0;
+    let timeLeft = 30;
+    let timer;
+
+    function scrambleWord(word) {
+      return word.split('').sort(() => Math.random() - 0.5).join('');
+    }
+
+    function startTimer() {
+      clearInterval(timer);
+      timeLeft = 30;
+      document.getElementById("timer").textContent = "Time left: 30s";
+      timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").textContent = "Time left: " + timeLeft + "s";
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          alert("⏰ Time's up! The word was: " + currentWord);
+          nextWord();
+        }
+      }, 1000);
+    }
+
+    function nextWord() {
+      if (currentIndex >= words.length) {
+        clearInterval(timer);
+        document.getElementById("scrambled").textContent = "🎉 Game Over!";
+        document.getElementById("guess").style.display = "none";
+        document.querySelector("button").style.display = "none";
+        document.getElementById("timer").textContent = "";
+        document.getElementById("score").textContent = "Final Score: " + score + " / " + words.length;
+        return;
+      }
+
+      currentWord = words[currentIndex].word;
+      scrambled = scrambleWord(currentWord);
+      document.getElementById("scrambled").textContent = scrambled.toUpperCase();
+      document.getElementById("guess").value = "";
+      startTimer();
+    }
+
+    function checkAnswer() {
+      const guess = document.getElementById("guess").value.toLowerCase();
+      if (guess === currentWord) {
+        score++;
+        document.getElementById("score").textContent = "Score: " + score;
+        alert("✅ Correct!");
+      } else {
+        alert("❌ Wrong! The word was: " + currentWord);
+      }
+      currentIndex++;
+      nextWord();
+    }
+
+    // Start first round
+    nextWord();
+  </script>
+
+</body>
+</html>
